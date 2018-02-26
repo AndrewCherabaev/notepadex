@@ -2,5 +2,5 @@
 /deps
 /doc
 *.ez
-*.sublime-workplace
+*.sublime-workspace
 window

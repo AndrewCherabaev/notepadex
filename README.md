@@ -3,7 +3,7 @@
 
 ## Installation
 
-`mix escript.build`
+`mix deps.get && mix escript.build`
 
 On linux:
 `window`
