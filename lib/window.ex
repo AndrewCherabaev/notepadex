@@ -1,25 +1,37 @@
 defmodule Window do
+  import :wxFrame
   alias :wx,            as: Wx
-  alias :wxFrame,       as: WxFrame
-  alias :wxClose,       as: WxClose
-  alias :close_window,  as: CloseWindow
+  alias :wxMenu,        as: WxMenu
+  alias :wxMenuBar,     as: WxMenuBar
+  alias :wxMenuItem,    as: WxMenuItem
 
 
   def main(_Args) do
-    frame = Wx.new() |> WxFrame.new(-1, 'Hello world')
-
-    frame |> WxFrame.show()
-    frame |> initCallbacks() |> loop()
-    frame |> WxFrame.destroy()
+    frame = Wx.new() |> new(-1, 'Hello world')
+    frame |> center()
+    frame |> show()
+    frame |> initMenu() |> initCallbacks() |> loop()
+    frame |> destroy()
   end
 
   def initCallbacks(frame) do
-    frame |> WxFrame.connect(CloseWindow)
+    frame |> connect(:close_window)
+  end
+
+  def initMenu(frame) do
+    menu_bar = WxMenuBar.new()
+    frame |> setMenuBar(menu_bar)
+
+    menu = WxMenu.new()
+    menu_bar |> WxMenuBar.append(menu, "&File")
+    quit = WxMenuItem.new([{:id, 400}, {:text, "&Quit"}])
+    menu |> WxMenu.append(quit)
+    frame
   end
 
   def loop(frame) do
     receive do
-      {_,_,_,_,{WxClose, CloseWindow}} -> :ok
+      {_,_,_,_,{:wxClose, :close_window}} -> :ok
       _ -> loop(frame)
     end
   end

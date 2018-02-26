@@ -29,6 +29,8 @@ defmodule Window.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    []
+    [
+      {:wx_helper, git: "https://github.com/rtvu/wx_helper.git"}
+    ]
   end
 end

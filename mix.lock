@@ -1,0 +1,2 @@
+%{"wx_helper": {:git, "https://github.com/rtvu/wx_helper.git", "88b36f580a61d62bead24a94bc24db8408ccbadd", []},
+  "wxelixir": {:git, 'https://github.com/ElixirWin/wxElixir', "1061f8e6b885897a0475ff7b097abde304524bb1", []}}
